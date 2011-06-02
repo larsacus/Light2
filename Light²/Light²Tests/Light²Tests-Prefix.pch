@@ -1,7 +1,0 @@
-//
-// Prefix header for all source files of the 'Light²Tests' target in the 'Light²Tests' project
-//
-
-#ifdef __OBJC__
-    #import <UIKit/UIKit.h>
-#endif
