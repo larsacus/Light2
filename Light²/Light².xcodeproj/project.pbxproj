@@ -1,0 +1,346 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		46AFD1301397292F00654864 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AFD12F1397292F00654864 /* UIKit.framework */; };
+		46AFD1321397292F00654864 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AFD1311397292F00654864 /* Foundation.framework */; };
+		46AFD1341397292F00654864 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AFD1331397292F00654864 /* CoreGraphics.framework */; };
+		46AFD13A1397292F00654864 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD1381397292F00654864 /* InfoPlist.strings */; };
+		46AFD13D1397292F00654864 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AFD13C1397292F00654864 /* main.m */; };
+		46AFD1401397292F00654864 /* Light_AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AFD13F1397292F00654864 /* Light_AppDelegate.m */; };
+		46AFD1431397292F00654864 /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD1411397292F00654864 /* MainWindow.xib */; };
+		46AFD1461397292F00654864 /* Light_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AFD1451397292F00654864 /* Light_ViewController.m */; };
+		46AFD1491397292F00654864 /* Light_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD1471397292F00654864 /* Light_ViewController.xib */; };
+		46AFD16B1397294700654864 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD1691397294600654864 /* MainWindow-iPad.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		46AFD12B1397292F00654864 /* Light².app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light².app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		46AFD12F1397292F00654864 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		46AFD1311397292F00654864 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		46AFD1331397292F00654864 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		46AFD1371397292F00654864 /* Light²-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Light²-Info.plist"; sourceTree = "<group>"; };
+		46AFD1391397292F00654864 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		46AFD13B1397292F00654864 /* Light²-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Light²-Prefix.pch"; sourceTree = "<group>"; };
+		46AFD13C1397292F00654864 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		46AFD13E1397292F00654864 /* Light_AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Light_AppDelegate.h; sourceTree = "<group>"; };
+		46AFD13F1397292F00654864 /* Light_AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Light_AppDelegate.m; sourceTree = "<group>"; };
+		46AFD1421397292F00654864 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		46AFD1441397292F00654864 /* Light_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Light_ViewController.h; sourceTree = "<group>"; };
+		46AFD1451397292F00654864 /* Light_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Light_ViewController.m; sourceTree = "<group>"; };
+		46AFD1481397292F00654864 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/Light_ViewController.xib; sourceTree = "<group>"; };
+		46AFD1571397293000654864 /* Light²Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Light²Tests-Info.plist"; sourceTree = "<group>"; };
+		46AFD1591397293000654864 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		46AFD15B1397293000654864 /* Light²Tests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Light²Tests-Prefix.pch"; sourceTree = "<group>"; };
+		46AFD15C1397293000654864 /* Light_Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Light_Tests.h; sourceTree = "<group>"; };
+		46AFD15E1397293000654864 /* Light_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Light_Tests.m; sourceTree = "<group>"; };
+		46AFD16A1397294700654864 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		46AFD1281397292F00654864 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46AFD1301397292F00654864 /* UIKit.framework in Frameworks */,
+				46AFD1321397292F00654864 /* Foundation.framework in Frameworks */,
+				46AFD1341397292F00654864 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		46AFD1201397292F00654864 = {
+			isa = PBXGroup;
+			children = (
+				46AFD1351397292F00654864 /* Light² */,
+				46AFD1551397293000654864 /* Light²Tests */,
+				46AFD12E1397292F00654864 /* Frameworks */,
+				46AFD12C1397292F00654864 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		46AFD12C1397292F00654864 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				46AFD12B1397292F00654864 /* Light².app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		46AFD12E1397292F00654864 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46AFD12F1397292F00654864 /* UIKit.framework */,
+				46AFD1311397292F00654864 /* Foundation.framework */,
+				46AFD1331397292F00654864 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46AFD1351397292F00654864 /* Light² */ = {
+			isa = PBXGroup;
+			children = (
+				46AFD1681397293F00654864 /* iPad */,
+				46AFD13E1397292F00654864 /* Light_AppDelegate.h */,
+				46AFD13F1397292F00654864 /* Light_AppDelegate.m */,
+				46AFD1411397292F00654864 /* MainWindow.xib */,
+				46AFD1441397292F00654864 /* Light_ViewController.h */,
+				46AFD1451397292F00654864 /* Light_ViewController.m */,
+				46AFD1471397292F00654864 /* Light_ViewController.xib */,
+				46AFD1361397292F00654864 /* Supporting Files */,
+			);
+			path = "Light²";
+			sourceTree = "<group>";
+		};
+		46AFD1361397292F00654864 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				46AFD1371397292F00654864 /* Light²-Info.plist */,
+				46AFD1381397292F00654864 /* InfoPlist.strings */,
+				46AFD13B1397292F00654864 /* Light²-Prefix.pch */,
+				46AFD13C1397292F00654864 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		46AFD1551397293000654864 /* Light²Tests */ = {
+			isa = PBXGroup;
+			children = (
+				46AFD15C1397293000654864 /* Light_Tests.h */,
+				46AFD15E1397293000654864 /* Light_Tests.m */,
+				46AFD1561397293000654864 /* Supporting Files */,
+			);
+			path = "Light²Tests";
+			sourceTree = "<group>";
+		};
+		46AFD1561397293000654864 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				46AFD1571397293000654864 /* Light²Tests-Info.plist */,
+				46AFD1581397293000654864 /* InfoPlist.strings */,
+				46AFD15B1397293000654864 /* Light²Tests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		46AFD1681397293F00654864 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				46AFD1691397294600654864 /* MainWindow-iPad.xib */,
+			);
+			name = iPad;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		46AFD12A1397292F00654864 /* Light² */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46AFD1621397293000654864 /* Build configuration list for PBXNativeTarget "Light²" */;
+			buildPhases = (
+				46AFD1271397292F00654864 /* Sources */,
+				46AFD1281397292F00654864 /* Frameworks */,
+				46AFD1291397292F00654864 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Light²";
+			productName = "Light²";
+			productReference = 46AFD12B1397292F00654864 /* Light².app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		46AFD1221397292F00654864 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 46AFD1251397292F00654864 /* Build configuration list for PBXProject "Light²" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 46AFD1201397292F00654864;
+			productRefGroup = 46AFD12C1397292F00654864 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				46AFD12A1397292F00654864 /* Light² */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		46AFD1291397292F00654864 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46AFD13A1397292F00654864 /* InfoPlist.strings in Resources */,
+				46AFD1431397292F00654864 /* MainWindow.xib in Resources */,
+				46AFD1491397292F00654864 /* Light_ViewController.xib in Resources */,
+				46AFD16B1397294700654864 /* MainWindow-iPad.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		46AFD1271397292F00654864 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				46AFD13D1397292F00654864 /* main.m in Sources */,
+				46AFD1401397292F00654864 /* Light_AppDelegate.m in Sources */,
+				46AFD1461397292F00654864 /* Light_ViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		46AFD1381397292F00654864 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				46AFD1391397292F00654864 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		46AFD1411397292F00654864 /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				46AFD1421397292F00654864 /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		46AFD1471397292F00654864 /* Light_ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				46AFD1481397292F00654864 /* en */,
+			);
+			name = Light_ViewController.xib;
+			sourceTree = "<group>";
+		};
+		46AFD1581397293000654864 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				46AFD1591397293000654864 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		46AFD1691397294600654864 /* MainWindow-iPad.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				46AFD16A1397294700654864 /* en */,
+			);
+			name = "MainWindow-iPad.xib";
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		46AFD1601397293000654864 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = 4.2;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				RUN_CLANG_STATIC_ANALYZER = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		46AFD1611397293000654864 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = 4.2;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				RUN_CLANG_STATIC_ANALYZER = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		46AFD1631397293000654864 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Light²/Light²-Prefix.pch";
+				INFOPLIST_FILE = "Light²/Light²-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		46AFD1641397293000654864 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Light²/Light²-Prefix.pch";
+				INFOPLIST_FILE = "Light²/Light²-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		46AFD1251397292F00654864 /* Build configuration list for PBXProject "Light²" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46AFD1601397293000654864 /* Debug */,
+				46AFD1611397293000654864 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		46AFD1621397293000654864 /* Build configuration list for PBXNativeTarget "Light²" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				46AFD1631397293000654864 /* Debug */,
+				46AFD1641397293000654864 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 46AFD1221397292F00654864 /* Project object */;
+}
