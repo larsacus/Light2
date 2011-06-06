@@ -17,6 +17,22 @@
 		46AFD1461397292F00654864 /* Light_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AFD1451397292F00654864 /* Light_ViewController.m */; };
 		46AFD1491397292F00654864 /* Light_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD1471397292F00654864 /* Light_ViewController.xib */; };
 		46AFD16B1397294700654864 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD1691397294600654864 /* MainWindow-iPad.xib */; };
+		46E42816139ABF4A004CA035 /* LATorch.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E42815139ABF4A004CA035 /* LATorch.m */; };
+		46E4281F139AC151004CA035 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E4281E139AC151004CA035 /* AVFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		46E42821139C6C0E004CA035 /* light_honeycomb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E42820139C6C0E004CA035 /* light_honeycomb@2x.png */; };
+		46E42830139C6DF1004CA035 /* 45degree_fabric@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E42823139C6DF1004CA035 /* 45degree_fabric@2x.png */; };
+		46E42831139C6DF1004CA035 /* fabric_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E42824139C6DF1004CA035 /* fabric_1@2x.png */; };
+		46E42832139C6DF1004CA035 /* white_carbon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E42825139C6DF1004CA035 /* white_carbon@2x.png */; };
+		46E42833139C6DF1004CA035 /* leather_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E42826139C6DF1004CA035 /* leather_1@2x.png */; };
+		46E42834139C6DF1004CA035 /* paper_1@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E42827139C6DF1004CA035 /* paper_1@2x.png */; };
+		46E42835139C6DF1004CA035 /* white_sand@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E42828139C6DF1004CA035 /* white_sand@2x.png */; };
+		46E42836139C6DF1004CA035 /* exclusive_paper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E42829139C6DF1004CA035 /* exclusive_paper@2x.png */; };
+		46E42837139C6DF1004CA035 /* 60degree_gray@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E4282A139C6DF1004CA035 /* 60degree_gray@2x.png */; };
+		46E42838139C6DF1004CA035 /* smooth_wall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E4282B139C6DF1004CA035 /* smooth_wall@2x.png */; };
+		46E42839139C6DF1004CA035 /* pinstripe@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E4282C139C6DF1004CA035 /* pinstripe@2x.png */; };
+		46E4283A139C6DF1004CA035 /* handmadepaper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E4282D139C6DF1004CA035 /* handmadepaper@2x.png */; };
+		46E4283B139C6DF1004CA035 /* rockywall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E4282E139C6DF1004CA035 /* rockywall@2x.png */; };
+		46E4283C139C6DF1004CA035 /* double_lined@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E4282F139C6DF1004CA035 /* double_lined@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +56,23 @@
 		46AFD15C1397293000654864 /* Light_Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Light_Tests.h; sourceTree = "<group>"; };
 		46AFD15E1397293000654864 /* Light_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Light_Tests.m; sourceTree = "<group>"; };
 		46AFD16A1397294700654864 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
+		46E42814139ABF4A004CA035 /* LATorch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LATorch.h; sourceTree = "<group>"; };
+		46E42815139ABF4A004CA035 /* LATorch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LATorch.m; sourceTree = "<group>"; };
+		46E4281E139AC151004CA035 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		46E42820139C6C0E004CA035 /* light_honeycomb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light_honeycomb@2x.png"; sourceTree = "<group>"; };
+		46E42823139C6DF1004CA035 /* 45degree_fabric@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "45degree_fabric@2x.png"; sourceTree = "<group>"; };
+		46E42824139C6DF1004CA035 /* fabric_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "fabric_1@2x.png"; sourceTree = "<group>"; };
+		46E42825139C6DF1004CA035 /* white_carbon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white_carbon@2x.png"; sourceTree = "<group>"; };
+		46E42826139C6DF1004CA035 /* leather_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "leather_1@2x.png"; sourceTree = "<group>"; };
+		46E42827139C6DF1004CA035 /* paper_1@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "paper_1@2x.png"; sourceTree = "<group>"; };
+		46E42828139C6DF1004CA035 /* white_sand@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white_sand@2x.png"; sourceTree = "<group>"; };
+		46E42829139C6DF1004CA035 /* exclusive_paper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "exclusive_paper@2x.png"; sourceTree = "<group>"; };
+		46E4282A139C6DF1004CA035 /* 60degree_gray@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "60degree_gray@2x.png"; sourceTree = "<group>"; };
+		46E4282B139C6DF1004CA035 /* smooth_wall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "smooth_wall@2x.png"; sourceTree = "<group>"; };
+		46E4282C139C6DF1004CA035 /* pinstripe@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pinstripe@2x.png"; sourceTree = "<group>"; };
+		46E4282D139C6DF1004CA035 /* handmadepaper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "handmadepaper@2x.png"; sourceTree = "<group>"; };
+		46E4282E139C6DF1004CA035 /* rockywall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rockywall@2x.png"; sourceTree = "<group>"; };
+		46E4282F139C6DF1004CA035 /* double_lined@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "double_lined@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -47,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46E4281F139AC151004CA035 /* AVFoundation.framework in Frameworks */,
 				46AFD1301397292F00654864 /* UIKit.framework in Frameworks */,
 				46AFD1321397292F00654864 /* Foundation.framework in Frameworks */,
 				46AFD1341397292F00654864 /* CoreGraphics.framework in Frameworks */,
@@ -59,6 +93,8 @@
 		46AFD1201397292F00654864 = {
 			isa = PBXGroup;
 			children = (
+				46E42822139C6C12004CA035 /* Images */,
+				46E4281E139AC151004CA035 /* AVFoundation.framework */,
 				46AFD1351397292F00654864 /* Light² */,
 				46AFD1551397293000654864 /* Light²Tests */,
 				46AFD12E1397292F00654864 /* Frameworks */,
@@ -90,6 +126,8 @@
 				46AFD1681397293F00654864 /* iPad */,
 				46AFD13E1397292F00654864 /* Light_AppDelegate.h */,
 				46AFD13F1397292F00654864 /* Light_AppDelegate.m */,
+				46E42814139ABF4A004CA035 /* LATorch.h */,
+				46E42815139ABF4A004CA035 /* LATorch.m */,
 				46AFD1411397292F00654864 /* MainWindow.xib */,
 				46AFD1441397292F00654864 /* Light_ViewController.h */,
 				46AFD1451397292F00654864 /* Light_ViewController.m */,
@@ -136,6 +174,35 @@
 				46AFD1691397294600654864 /* MainWindow-iPad.xib */,
 			);
 			name = iPad;
+			sourceTree = "<group>";
+		};
+		46E42822139C6C12004CA035 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				46E4283D139C709D004CA035 /* Light */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
+		46E4283D139C709D004CA035 /* Light */ = {
+			isa = PBXGroup;
+			children = (
+				46E42823139C6DF1004CA035 /* 45degree_fabric@2x.png */,
+				46E42824139C6DF1004CA035 /* fabric_1@2x.png */,
+				46E42825139C6DF1004CA035 /* white_carbon@2x.png */,
+				46E42826139C6DF1004CA035 /* leather_1@2x.png */,
+				46E42827139C6DF1004CA035 /* paper_1@2x.png */,
+				46E42828139C6DF1004CA035 /* white_sand@2x.png */,
+				46E42829139C6DF1004CA035 /* exclusive_paper@2x.png */,
+				46E4282A139C6DF1004CA035 /* 60degree_gray@2x.png */,
+				46E4282B139C6DF1004CA035 /* smooth_wall@2x.png */,
+				46E4282C139C6DF1004CA035 /* pinstripe@2x.png */,
+				46E4282D139C6DF1004CA035 /* handmadepaper@2x.png */,
+				46E4282E139C6DF1004CA035 /* rockywall@2x.png */,
+				46E4282F139C6DF1004CA035 /* double_lined@2x.png */,
+				46E42820139C6C0E004CA035 /* light_honeycomb@2x.png */,
+			);
+			name = Light;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -189,6 +256,20 @@
 				46AFD1431397292F00654864 /* MainWindow.xib in Resources */,
 				46AFD1491397292F00654864 /* Light_ViewController.xib in Resources */,
 				46AFD16B1397294700654864 /* MainWindow-iPad.xib in Resources */,
+				46E42821139C6C0E004CA035 /* light_honeycomb@2x.png in Resources */,
+				46E42830139C6DF1004CA035 /* 45degree_fabric@2x.png in Resources */,
+				46E42831139C6DF1004CA035 /* fabric_1@2x.png in Resources */,
+				46E42832139C6DF1004CA035 /* white_carbon@2x.png in Resources */,
+				46E42833139C6DF1004CA035 /* leather_1@2x.png in Resources */,
+				46E42834139C6DF1004CA035 /* paper_1@2x.png in Resources */,
+				46E42835139C6DF1004CA035 /* white_sand@2x.png in Resources */,
+				46E42836139C6DF1004CA035 /* exclusive_paper@2x.png in Resources */,
+				46E42837139C6DF1004CA035 /* 60degree_gray@2x.png in Resources */,
+				46E42838139C6DF1004CA035 /* smooth_wall@2x.png in Resources */,
+				46E42839139C6DF1004CA035 /* pinstripe@2x.png in Resources */,
+				46E4283A139C6DF1004CA035 /* handmadepaper@2x.png in Resources */,
+				46E4283B139C6DF1004CA035 /* rockywall@2x.png in Resources */,
+				46E4283C139C6DF1004CA035 /* double_lined@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -202,6 +283,7 @@
 				46AFD13D1397292F00654864 /* main.m in Sources */,
 				46AFD1401397292F00654864 /* Light_AppDelegate.m in Sources */,
 				46AFD1461397292F00654864 /* Light_ViewController.m in Sources */,
+				46E42816139ABF4A004CA035 /* LATorch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

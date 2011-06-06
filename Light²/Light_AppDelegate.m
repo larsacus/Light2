@@ -16,6 +16,8 @@
 @synthesize window=_window;
 
 @synthesize viewController=_viewController;
+@synthesize torch = _torch;
+@synthesize hasFlash = _hasFlash;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -26,6 +28,16 @@
     }
     else{
         [self.window addSubview:self.viewController.view];
+    }
+    
+    if ([AVCaptureSession class] && 
+        [[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo] hasFlash]
+        ) {
+        _torch = [[LATorch alloc] initWithTorchOn:YES];
+        [self setHasFlash:YES];
+    }
+    else{
+        [self setHasFlash:NO];
     }
     
     [self.window makeKeyAndVisible];
@@ -53,6 +65,7 @@
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
+    
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -60,6 +73,14 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+    [(Light_ViewController *)[self viewController] randomizeBackgroundAnimated:YES];
+    
+#if !TARGET_IPHONE_SIMULATOR
+	if (![self torch]) {
+		NSLog(@"Starting flashlight session");
+		_torch = [[LATorch alloc] initWithTorchOn:YES];
+	}
+#endif
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -75,6 +96,8 @@
 {
     [_window release];
     [_viewController release];
+    [_torch release];
+    
     [super dealloc];
 }
 
