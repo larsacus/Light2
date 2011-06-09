@@ -7,11 +7,13 @@
 //
 
 #import "LATorch.h"
+#import <Foundation/Foundation.h>
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
 @implementation LATorch
 
+@synthesize systemVersion = _systemVersion;
 @synthesize torchSession = _torchSession;
 @synthesize torchDevice = _torchDevice;
 @synthesize torchDeviceInput = _torchDeviceInput;
@@ -24,7 +26,10 @@
 - (id)initWithTorchOn:(BOOL)torchOn{
     self = [super init];
     if(self){
-        [self createNewTorchSessionWithTorchOn:torchOn];
+        [self setSystemVersion:[[[UIDevice currentDevice] systemVersion] floatValue]];
+        NSLog(@"System version is %f", [self systemVersion]);
+        
+        [self setTorchOn:torchOn];
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self 
@@ -38,8 +43,7 @@
 
 - (BOOL)isTorchOn{
     return  [[self torchSession] isRunning] && 
-            ([[self torchDevice] torchMode] == AVCaptureTorchModeOn) &&
-            ([[self torchDevice] flashMode] == AVCaptureFlashModeOn);
+            ([[self torchDevice] torchMode] == AVCaptureTorchModeOn);
 }
 
 - (BOOL)isInturrupted{
@@ -47,64 +51,89 @@
 }
 
 - (void)setTorchOn:(BOOL)torchOn{
-    NSError *lockError = nil;
-    if(![[self torchDevice] lockForConfiguration:&lockError]){
-        
-        /*//Fetches exact model code of device for logging
-        //http://stackoverflow.com/questions/1108859/detect-the-specific-iphone-ipod-touch-model
-        //
-        size_t size;
-        sysctlbyname("hw.machine", NULL, &size, NULL, 0);
-        char *machine = malloc(size);
-        sysctlbyname("hw.machine", machine, &size, NULL, 0);
-        NSString *platform = [NSString stringWithCString:machine encoding:NSUTF8StringEncoding];
-        //REPORT MACHINE MODEL TO ANALYTICS
-        free(machine);*/
-        NSLog(@"Lock error: %@", [lockError localizedDescription]);
+    
+    if (![self torchSession] && ([self systemVersion] < 5.0f)) {
+        NSLog(@"Creating session");
+        _torchSession = [[AVCaptureSession alloc] init];
+        NSLog(@"Done!");
     }
     
-    [[self torchSession] beginConfiguration];
-    
-    if (![[[self torchSession] inputs] containsObject:[self torchDeviceInput]]) {
-        [[self torchSession] addInput:[self torchDeviceInput]];
-    }
-    
-    if (![[[self torchSession] outputs] containsObject:[self torchOutput]]) {
-        [[self torchSession] addOutput:[self torchOutput]];
-    }
-    
-    if (torchOn) {
-        [[self torchDevice] setTorchMode:AVCaptureTorchModeOn];
-        [[self torchDevice] setFlashMode:AVCaptureFlashModeOn];
-    }
-    else {
-        [[self torchDevice] setTorchMode:AVCaptureTorchModeOff];
-        [[self torchDevice] setFlashMode:AVCaptureFlashModeOff];
-    }
-    
-    [[self torchDevice] unlockForConfiguration];
-    
-    [[self torchSession] commitConfiguration];
-}
-
-- (void)createNewTorchSessionWithTorchOn:(BOOL)torchOn{
-    if (![self torchSession]) {
+    if (![self torchDevice]) {
+        NSLog(@"Creating device");
         _torchDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
-        
-        if ([[self torchDevice] hasTorch] && [[self torchDevice] hasFlash]){
-            NSError *deviceError = nil;
-            
-            _torchDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:[self torchDevice] error: &deviceError];
-            
-            //light does not function without capture output
-            _torchOutput = [[AVCaptureVideoDataOutput alloc] init];
-        
-            _torchSession = [[AVCaptureSession alloc] init];
-            
+        NSLog(@"Done!");
+    }
+    
+    if ([self torchDevice] && [[self torchDevice] hasTorch]) {
+
+        NSLog(@"Device has useable torch!");
+        //set session preset to lowest allowed to conserve system resources
+        if ([self systemVersion] < 5.0f){
+            NSLog(@"Session preset set to low");
             [[self torchSession] setSessionPreset:AVCaptureSessionPresetLow];
-            [self setTorchOn:YES];
-            
+        }
+        
+        NSError *lockError = nil;
+        NSLog(@"Locking device for configuration");
+        if(![[self torchDevice] lockForConfiguration:&lockError]){
+            NSLog(@"Lock error: %@\nReason: %@", [lockError localizedDescription], [lockError localizedFailureReason]);
+        }
+        
+        NSLog(@"Beginning configuration");
+        [[self torchSession] beginConfiguration];
+        
+        NSLog(@"Verifying session input");
+        if (![[[self torchSession] inputs] containsObject:[self torchDeviceInput]] && ([self systemVersion] < 5.0f)) {
+            NSLog(@"Input is not attached to session");
+            if (![self torchDeviceInput]) {
+                NSLog(@"Creating...");
+                NSError *deviceError = nil;
+                _torchDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:[self torchDevice] error:&deviceError];
+                
+                if (deviceError) {
+                    NSLog(@"Device Error: %@\nReason: %@", [deviceError localizedDescription], [deviceError localizedFailureReason]);
+                }
+                NSLog(@"Done!");
+            }
+            NSLog(@"Adding input to session");
+            [[self torchSession] addInput:[self torchDeviceInput]];
+        }
+        
+        NSLog(@"Verifying session output");
+        //light does not function without capture output
+        if (![[[self torchSession] outputs] containsObject:[self torchOutput]] && ([self systemVersion] < 5.0f)) {
+            NSLog(@"Output not attached to session");
+            if (![self torchOutput]) {
+                NSLog(@"Creating...");
+                _torchOutput = [[AVCaptureVideoDataOutput alloc] init];
+            }
+            NSLog(@"Adding input to session");
+            [[self torchSession] addOutput:[self torchOutput]];
+        }
+        
+        NSLog(@"Setting torch mode to %@", torchOn ? @"ON" : @"OFF");
+        if (torchOn) {
+            [[self torchDevice] setTorchMode:AVCaptureTorchModeOn];
+            [[self torchDevice] setFlashMode:AVCaptureFlashModeOn];
+        }
+        else {
+            [[self torchDevice] setTorchMode:AVCaptureTorchModeOff];
+            [[self torchDevice] setFlashMode:AVCaptureFlashModeOff];
+        }
+        
+        NSLog(@"Unlocking device for configuration");
+        [[self torchDevice] unlockForConfiguration];
+        
+        NSLog(@"Committing configuration");
+        [[self torchSession] commitConfiguration];
+        
+        
+        if (![[self torchSession] isRunning] && ([self systemVersion] < 5.000000f)) {
+            NSLog(@"Starting session");
             [[self torchSession] startRunning];
+        }
+        else{
+            NSLog(@"Session is already started or session does not need to exist");
         }
     }
 }

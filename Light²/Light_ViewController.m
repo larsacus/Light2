@@ -7,19 +7,20 @@
 //
 
 #import "Light_ViewController.h"
+#import "Light_AppDelegate.h"
 
-#define kTransitionDuration 0.7
+#define kTransitionDuration 1.5
 
 @implementation Light_ViewController
 
 @synthesize imageView = _imageView;
 @synthesize transitionView = _transitionView;
-@synthesize lightImagesArray = _lightImagesArray;
-@synthesize darkImagesArray = _darkImagesArray;
+@synthesize imagesArray = _imagesArray;
+
 
 - (void)dealloc
 {
-    [_lightImagesArray release];
+    [_imagesArray release];
     
     [super dealloc];
 }
@@ -39,25 +40,47 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    //[[UIScreen mainScreen] setBrightness:0.1f]; //sets screen brightness to 10%
     
-    _lightImagesArray = [[NSMutableArray alloc] initWithObjects:
-                         @"45degree_fabric",
-                         @"fabric_1",
-                         @"white_carbon",
-                         @"leather_1",
-                         @"paper_1",
-                         @"white_sand",
-                         @"exclusive_paper",
-                         @"60degree_gray",
-                         @"smooth_wall",
-                         @"pinstripe",
-                         @"handmadepaper",
-                         @"rockywall",
-                         @"double_lined",
-                         @"light_honeycomb",
-                         nil];
+    if ([(Light_AppDelegate *)[[UIApplication sharedApplication] delegate] hasFlash]){
+        //device has flash
+        //init array with dark images
+        _imagesArray = [[NSMutableArray alloc] initWithObjects:
+                        @"carbon_fibre",
+                        @"tactile_noise",
+                        @"black_denim",
+                        @"dark_stripes",
+                        @"wood_1",
+                        @"black_paper",
+                        @"blackmamba",
+                        @"padded",
+                        @"black_linen",
+                        @"random_grey_variations",
+                        nil];
+    }
+    else{
+        //device has no flash
+        //init with light images
+        _imagesArray = [[NSMutableArray alloc] initWithObjects:
+                        @"45degree_fabric",
+                        @"fabric_1",
+                        @"white_carbon",
+                        @"leather_1",
+                        @"paper_1",
+                        @"white_sand",
+                        @"exclusive_paper",
+                        @"60degree_gray",
+                        @"smooth_wall",
+                        @"pinstripe",
+                        @"handmadepaper",
+                        @"rockywall",
+                        @"double_lined",
+                        @"light_honeycomb",
+                        nil];
+    }
     
-    [self randomizeBackgroundAnimated:NO];
+    
+    //[self randomizeBackgroundAnimated:NO];
 }
 
 - (void)viewDidUnload
@@ -76,15 +99,15 @@
 - (void)randomizeBackgroundAnimated:(BOOL)animated{
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     
-    int rand = arc4random() % [[self lightImagesArray] count];
+    int rand = arc4random() % [[self imagesArray] count];
     
     if (animated) {
         //change transition image
-        [[self transitionView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[[self lightImagesArray] objectAtIndex:rand]]]];
+        [[self transitionView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[[self imagesArray] objectAtIndex:rand]]]];
         
         [UIView animateWithDuration:kTransitionDuration
                               delay:0.0 
-                            options:UIViewAnimationOptionCurveEaseInOut 
+                            options:UIViewAnimationOptionCurveEaseIn 
                          animations:^{
                              //fade in transition image to opaque
                              [[self transitionView] setAlpha:1.0f];
@@ -100,7 +123,7 @@
          ];
     }
     else{
-        [[self imageView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[[self lightImagesArray] objectAtIndex:rand]]]];
+        [[self imageView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[[self imagesArray] objectAtIndex:rand]]]];
     }
     
     [pool drain];

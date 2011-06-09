@@ -13,6 +13,7 @@
     
 @private
 #if !TARGET_IPHONE_SIMULATOR
+    float _systemVersion;
     AVCaptureSession *_torchSession;
     AVCaptureDevice *_torchDevice;
     AVCaptureDeviceInput *_torchDeviceInput;
@@ -22,6 +23,7 @@
 }
 
 #if !TARGET_IPHONE_SIMULATOR
+@property (nonatomic) float systemVersion;
 @property (nonatomic, retain) AVCaptureSession *torchSession;
 @property (nonatomic, retain) AVCaptureDevice *torchDevice;
 @property (nonatomic, retain) AVCaptureDeviceInput *torchDeviceInput;
@@ -32,7 +34,6 @@
 - (void)setTorchOn:(BOOL)torchOn;
 - (BOOL)isTorchOn;
 - (BOOL)isInturrupted;
-- (void)createNewTorchSessionWithTorchOn:(BOOL)torchOn;
 - (void)verifyTorchSubsystemsWithTorchOn:(BOOL)torchOn;
 
 @end
