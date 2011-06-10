@@ -46,41 +46,38 @@
         //device has flash
         //init array with dark images
         _imagesArray = [[NSMutableArray alloc] initWithObjects:
-                        @"carbon_fibre",
-                        @"tactile_noise",
-                        @"black_denim",
-                        @"dark_stripes",
-                        @"wood_1",
-                        @"black_paper",
-                        @"blackmamba",
-                        @"padded",
-                        @"black_linen",
-                        @"random_grey_variations",
+                        @"carbon_fibre.png",
+                        @"tactile_noise.png",
+                        @"black_denim.png",
+                        @"dark_stripes.png",
+                        @"wood_1.png",
+                        @"black_paper.png",
+                        @"blackmamba.png",
+                        @"padded.png",
+                        @"black_linen.png",
+                        @"random_grey_variations.png",
                         nil];
     }
     else{
         //device has no flash
         //init with light images
         _imagesArray = [[NSMutableArray alloc] initWithObjects:
-                        @"45degree_fabric",
-                        @"fabric_1",
-                        @"white_carbon",
-                        @"leather_1",
-                        @"paper_1",
-                        @"white_sand",
-                        @"exclusive_paper",
-                        @"60degree_gray",
-                        @"smooth_wall",
-                        @"pinstripe",
-                        @"handmadepaper",
-                        @"rockywall",
-                        @"double_lined",
-                        @"light_honeycomb",
+                        @"45degree_fabric.png",
+                        @"fabric_1.png",
+                        @"white_carbon.png",
+                        @"leather_1.png",
+                        @"paper_1.png",
+                        @"white_sand.png",
+                        @"exclusive_paper.png",
+                        @"60degree_gray.png",
+                        @"smooth_wall.png",
+                        @"pinstripe.png",
+                        @"handmadepaper.png",
+                        @"rockywall.png",
+                        @"double_lined.png",
+                        @"light_honeycomb.png",
                         nil];
     }
-    
-    
-    //[self randomizeBackgroundAnimated:NO];
 }
 
 - (void)viewDidUnload
@@ -103,30 +100,62 @@
     
     if (animated) {
         //change transition image
+        //NSLog(@"image name: %@", [[self imagesArray] objectAtIndex:rand]);
         [[self transitionView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[[self imagesArray] objectAtIndex:rand]]]];
+        //[[self imageView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[[self imagesArray] objectAtIndex:rand]]]];
         
-        [UIView animateWithDuration:kTransitionDuration
-                              delay:0.0 
-                            options:UIViewAnimationOptionCurveEaseIn 
-                         animations:^{
-                             //fade in transition image to opaque
-                             [[self transitionView] setAlpha:1.0f];
-                         }
-                         completion:^(BOOL finished){
-                             //set main image to transition image
-                             [[self imageView] setBackgroundColor:[[self transitionView] backgroundColor]];
-                             
-                             //set transition image opacity to 0% to prep for new image
-                             [[self transitionView] setAlpha:0.0f];
-                             [[self transitionView] setBackgroundColor:nil];
-                         }
-         ];
+        //[[self imageView] setBackgroundColor:[UIColor redColor]];
+        //[[self transitionView] setBackgroundColor:[UIColor blueColor]];
+        
+        
+        if (NSClassFromString(@"NSBlockOperation")) {
+            NSLog(@"Using block animations");
+            [UIView animateWithDuration:kTransitionDuration
+                                  delay:0.0 
+                                options:UIViewAnimationOptionCurveEaseIn 
+                             animations:^{
+                                 //fade in transition image to opaque
+                                 [[self transitionView] setAlpha:1.0f];
+                             }
+                             completion:^(BOOL finished){
+                                 //set main image to transition image
+                                 [[self imageView] setBackgroundColor:[[self transitionView] backgroundColor]];
+                                 
+                                 //set transition image opacity to 0% to prep for new image
+                                 [[self transitionView] setAlpha:0.0f];
+                                 [[self transitionView] setBackgroundColor:nil];
+                             }
+             ];
+        }
+        else{
+            NSLog(@"Using UIView animations without blocks");
+            //system cannot use block animations, use older non-block animations instead
+            [UIView beginAnimations:@"image_transition" context:nil];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+            [UIView setAnimationDuration:kTransitionDuration];
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDidStopSelector:@selector(imageFadeOutAnimationDidStop:)];
+            
+            [[self transitionView] setAlpha:1.0f];
+            
+            [UIView commitAnimations];
+        }
     }
     else{
+        //NSLog(@"image name: %@", [[self imagesArray] objectAtIndex:rand]);
         [[self imageView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[[self imagesArray] objectAtIndex:rand]]]];
     }
     
     [pool drain];
+}
+
+- (void)imageFadeOutAnimationDidStop:(id)sender{
+    //set main image to transition image
+    [[self imageView] setBackgroundColor:[[self transitionView] backgroundColor]];
+    
+    //set transition image opacity to 0% to prep for new image
+    [[self transitionView] setAlpha:0.0f];
+    [[self transitionView] setBackgroundColor:nil];
 }
 
 @end
