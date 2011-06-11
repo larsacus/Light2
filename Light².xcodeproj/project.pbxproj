@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4648F66713A32AFE004F67D6 /* zap.png in Resources */ = {isa = PBXBuildFile; fileRef = 4648F66513A32AFE004F67D6 /* zap.png */; };
+		4648F66813A32AFE004F67D6 /* zap@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4648F66613A32AFE004F67D6 /* zap@2x.png */; };
 		4696543513A28ADB00DA476E /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4696543413A28ADB00DA476E /* libSystem.B.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		46A95C3A13A0431200B0F1A5 /* carbon_fibre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46A95C3013A0431200B0F1A5 /* carbon_fibre@2x.png */; };
 		46A95C3B13A0431200B0F1A5 /* tactile_noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46A95C3113A0431200B0F1A5 /* tactile_noise@2x.png */; };
@@ -32,6 +34,7 @@
 		46A95C7513A05E1700B0F1A5 /* rockywall.png in Resources */ = {isa = PBXBuildFile; fileRef = 46A95C6713A05E1700B0F1A5 /* rockywall.png */; };
 		46A95C7613A05E1700B0F1A5 /* double_lined.png in Resources */ = {isa = PBXBuildFile; fileRef = 46A95C6813A05E1700B0F1A5 /* double_lined.png */; };
 		46A95C7713A05E1700B0F1A5 /* light_honeycomb.png in Resources */ = {isa = PBXBuildFile; fileRef = 46A95C6913A05E1700B0F1A5 /* light_honeycomb.png */; };
+		46AED4DC13A32E26005E660E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AED4DB13A32E26005E660E /* QuartzCore.framework */; };
 		46AFD1301397292F00654864 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AFD12F1397292F00654864 /* UIKit.framework */; };
 		46AFD1321397292F00654864 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AFD1311397292F00654864 /* Foundation.framework */; };
 		46AFD1341397292F00654864 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46AFD1331397292F00654864 /* CoreGraphics.framework */; };
@@ -61,6 +64,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4648F66513A32AFE004F67D6 /* zap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = zap.png; sourceTree = "<group>"; };
+		4648F66613A32AFE004F67D6 /* zap@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "zap@2x.png"; sourceTree = "<group>"; };
 		4696543413A28ADB00DA476E /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
 		46A95C3013A0431200B0F1A5 /* carbon_fibre@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "carbon_fibre@2x.png"; sourceTree = "<group>"; };
 		46A95C3113A0431200B0F1A5 /* tactile_noise@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tactile_noise@2x.png"; sourceTree = "<group>"; };
@@ -86,6 +91,7 @@
 		46A95C6713A05E1700B0F1A5 /* rockywall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = rockywall.png; sourceTree = "<group>"; };
 		46A95C6813A05E1700B0F1A5 /* double_lined.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = double_lined.png; sourceTree = "<group>"; };
 		46A95C6913A05E1700B0F1A5 /* light_honeycomb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = light_honeycomb.png; sourceTree = "<group>"; };
+		46AED4DB13A32E26005E660E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		46AFD12B1397292F00654864 /* Light².app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Light².app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		46AFD12F1397292F00654864 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		46AFD1311397292F00654864 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -130,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46AED4DC13A32E26005E660E /* QuartzCore.framework in Frameworks */,
 				4696543513A28ADB00DA476E /* libSystem.B.dylib in Frameworks */,
 				46E4281F139AC151004CA035 /* AVFoundation.framework in Frameworks */,
 				46AFD1301397292F00654864 /* UIKit.framework in Frameworks */,
@@ -211,7 +218,7 @@
 		46AFD1201397292F00654864 = {
 			isa = PBXGroup;
 			children = (
-				4696543413A28ADB00DA476E /* libSystem.B.dylib */,
+				46AED4DB13A32E26005E660E /* QuartzCore.framework */,
 				46E42822139C6C12004CA035 /* Images */,
 				46AFD1351397292F00654864 /* Light² */,
 				46AFD1551397293000654864 /* Light²Tests */,
@@ -231,6 +238,7 @@
 		46AFD12E1397292F00654864 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4696543413A28ADB00DA476E /* libSystem.B.dylib */,
 				46E4281E139AC151004CA035 /* AVFoundation.framework */,
 				46AFD12F1397292F00654864 /* UIKit.framework */,
 				46AFD1311397292F00654864 /* Foundation.framework */,
@@ -298,6 +306,8 @@
 		46E42822139C6C12004CA035 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				4648F66513A32AFE004F67D6 /* zap.png */,
+				4648F66613A32AFE004F67D6 /* zap@2x.png */,
 				46A95C2E13A042AF00B0F1A5 /* Dark */,
 				46E4283D139C709D004CA035 /* Light */,
 			);
@@ -338,6 +348,9 @@
 /* Begin PBXProject section */
 		46AFD1221397292F00654864 /* Project object */ = {
 			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
 			buildConfigurationList = 46AFD1251397292F00654864 /* Build configuration list for PBXProject "Light²" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
@@ -402,6 +415,8 @@
 				46A95C7513A05E1700B0F1A5 /* rockywall.png in Resources */,
 				46A95C7613A05E1700B0F1A5 /* double_lined.png in Resources */,
 				46A95C7713A05E1700B0F1A5 /* light_honeycomb.png in Resources */,
+				4648F66713A32AFE004F67D6 /* zap.png in Resources */,
+				4648F66813A32AFE004F67D6 /* zap@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -475,6 +490,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;
@@ -492,6 +508,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Lars Anderson";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 3.0;

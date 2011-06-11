@@ -90,6 +90,7 @@
                 }
             }
         #endif
+        [[self viewController] setLowBatteryAnimation:YES];
     }
     
 }

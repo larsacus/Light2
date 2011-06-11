@@ -8,6 +8,7 @@
 
 #import "Light_ViewController.h"
 #import "Light_AppDelegate.h"
+#import <QuartzCore/QuartzCore.h>
 
 #define kTransitionDuration 1.5
 
@@ -16,6 +17,8 @@
 @synthesize imageView = _imageView;
 @synthesize transitionView = _transitionView;
 @synthesize imagesArray = _imagesArray;
+@synthesize lowBatteryIndicatorView = _lowBatteryIndicatorView;
+@synthesize lowBatteryText = _lowBatteryText;
 
 
 - (void)dealloc
@@ -41,6 +44,22 @@
 {
     [super viewDidLoad];
     //[[UIScreen mainScreen] setBrightness:0.1f]; //sets screen brightness to 10%
+    
+    //configure low battery indicator view
+    [[[self lowBatteryIndicatorView] layer] setCornerRadius:10.0f];
+    if ([(Light_AppDelegate *)[[UIApplication sharedApplication] delegate] hasFlash]) {
+        //no flash - make dark-colored scheme for alert
+        [[[self lowBatteryIndicatorView] layer] setBackgroundColor:[[UIColor colorWithRed:255.0f green:255.0f blue:255.0f alpha:0.25f] CGColor]];
+    }
+    else{
+        //has flash - make light colored scheme for alert
+        [[[self lowBatteryIndicatorView] layer] setBackgroundColor:[[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.25f] CGColor]];
+    }
+    //[[[self lowBatteryIndicatorView] layer] setBackgroundColor:[[UIColor colorWithRed:255.0f green:0.0f blue:0.0f alpha:0.5f] CGColor]];
+    
+    [[self lowBatteryText] setText:NSLocalizedString(@"Low Battery", @"Low Battery Indicator Text")];
+    
+    [self randomizeBackgroundAnimated:NO];
     
     if ([(Light_AppDelegate *)[[UIApplication sharedApplication] delegate] hasFlash]){
         //device has flash
@@ -78,6 +97,7 @@
                         @"light_honeycomb.png",
                         nil];
     }
+    [self setLowBatteryAnimation:YES];
 }
 
 - (void)viewDidUnload
@@ -100,12 +120,7 @@
     
     if (animated) {
         //change transition image
-        //NSLog(@"image name: %@", [[self imagesArray] objectAtIndex:rand]);
         [[self transitionView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[[self imagesArray] objectAtIndex:rand]]]];
-        //[[self imageView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[[self imagesArray] objectAtIndex:rand]]]];
-        
-        //[[self imageView] setBackgroundColor:[UIColor redColor]];
-        //[[self transitionView] setBackgroundColor:[UIColor blueColor]];
         
         
         if (NSClassFromString(@"NSBlockOperation")) {
@@ -133,8 +148,6 @@
             [UIView beginAnimations:@"image_transition" context:nil];
             [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
             [UIView setAnimationDuration:kTransitionDuration];
-            [UIView setAnimationDelegate:self];
-            [UIView setAnimationDidStopSelector:@selector(imageFadeOutAnimationDidStop:)];
             
             [[self transitionView] setAlpha:1.0f];
             
@@ -149,13 +162,25 @@
     [pool drain];
 }
 
-- (void)imageFadeOutAnimationDidStop:(id)sender{
-    //set main image to transition image
-    [[self imageView] setBackgroundColor:[[self transitionView] backgroundColor]];
-    
-    //set transition image opacity to 0% to prep for new image
-    [[self transitionView] setAlpha:0.0f];
-    [[self transitionView] setBackgroundColor:nil];
+- (void)setLowBatteryAnimation:(BOOL)shouldAnimate{
+    [[self lowBatteryIndicatorView] setAlpha:1.0f];
+    if (shouldAnimate) {
+        if (NSClassFromString(@"NSBlockOperation")) {
+            //animate with blocks
+            [UIView animateWithDuration:kTransitionDuration 
+                                  delay:0.0f 
+                                options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat 
+                             animations:^{
+                                 [[self lowBatteryIndicatorView] setAlpha:0.0f];
+                             }
+                             completion:nil
+             ];
+        }
+        else{
+            //animate without blocks
+            
+        }
+    }
 }
 
 @end
