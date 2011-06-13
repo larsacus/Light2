@@ -15,7 +15,8 @@
     IBOutlet UILabel *_lowBatteryText;
     
 @private
-    NSMutableArray *_imagesArray;
+    NSArray *_imagesArray;
+    BOOL _batteryIndicatorTapped;
 }
 
 @property (nonatomic,assign) UIImageView *imageView;
@@ -24,9 +25,12 @@
 @property (nonatomic,assign) UILabel *lowBatteryText;
 
 //privates
-@property (nonatomic,retain) NSMutableArray *imagesArray;
+@property (nonatomic,retain) NSArray *imagesArray;
+@property (nonatomic) BOOL batteryIndicatorTapped;
 
 - (void)randomizeBackgroundAnimated:(BOOL)animated;
 - (void)setLowBatteryAnimation:(BOOL)shouldAnimate;
+- (void)batteryStateChanged;
+- (void)handleLowBatteryAlertTap;
 
 @end

@@ -19,6 +19,7 @@
 @synthesize imagesArray = _imagesArray;
 @synthesize lowBatteryIndicatorView = _lowBatteryIndicatorView;
 @synthesize lowBatteryText = _lowBatteryText;
+@synthesize batteryIndicatorTapped = _batteryIndicatorTapped;
 
 
 - (void)dealloc
@@ -46,25 +47,22 @@
     //[[UIScreen mainScreen] setBrightness:0.1f]; //sets screen brightness to 10%
     
     //configure low battery indicator view
-    [[[self lowBatteryIndicatorView] layer] setCornerRadius:10.0f];
     if ([(Light_AppDelegate *)[[UIApplication sharedApplication] delegate] hasFlash]) {
         //no flash - make dark-colored scheme for alert
         [[[self lowBatteryIndicatorView] layer] setBackgroundColor:[[UIColor colorWithRed:255.0f green:255.0f blue:255.0f alpha:0.25f] CGColor]];
     }
     else{
-        //has flash - make light colored scheme for alert
+        //has flash - make light-colored scheme for alert
         [[[self lowBatteryIndicatorView] layer] setBackgroundColor:[[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.25f] CGColor]];
     }
-    //[[[self lowBatteryIndicatorView] layer] setBackgroundColor:[[UIColor colorWithRed:255.0f green:0.0f blue:0.0f alpha:0.5f] CGColor]];
-    
-    [[self lowBatteryText] setText:NSLocalizedString(@"Low Battery", @"Low Battery Indicator Text")];
-    
-    [self randomizeBackgroundAnimated:NO];
+    [[[self lowBatteryIndicatorView] layer] setCornerRadius:10.0f];
+    [[self lowBatteryText] setText:NSLocalizedString(@"Low Battery", @"Low battery indicator text")];
+    [[self lowBatteryText] setShadowOffset:CGSizeMake(0.0f, 1.0f)];
     
     if ([(Light_AppDelegate *)[[UIApplication sharedApplication] delegate] hasFlash]){
         //device has flash
         //init array with dark images
-        _imagesArray = [[NSMutableArray alloc] initWithObjects:
+        _imagesArray = [[NSArray alloc] initWithObjects:
                         @"carbon_fibre.png",
                         @"tactile_noise.png",
                         @"black_denim.png",
@@ -80,7 +78,7 @@
     else{
         //device has no flash
         //init with light images
-        _imagesArray = [[NSMutableArray alloc] initWithObjects:
+        _imagesArray = [[NSArray alloc] initWithObjects:
                         @"45degree_fabric.png",
                         @"fabric_1.png",
                         @"white_carbon.png",
@@ -97,7 +95,20 @@
                         @"light_honeycomb.png",
                         nil];
     }
-    [self setLowBatteryAnimation:YES];
+    [self randomizeBackgroundAnimated:NO];
+    
+    //setup tap gesture recognizer for low battery alert
+    if (NSClassFromString(@"UIGestureRecognizer")) {
+        UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleLowBatteryAlertTap)];
+        [tapGesture setNumberOfTapsRequired:1];
+        [tapGesture setNumberOfTouchesRequired:1];
+
+        [[self lowBatteryIndicatorView] setGestureRecognizers:[NSArray arrayWithObject:tapGesture]];
+        
+        [tapGesture release];
+    }
+    
+    [self setBatteryIndicatorTapped:NO];
 }
 
 - (void)viewDidUnload
@@ -163,23 +174,85 @@
 }
 
 - (void)setLowBatteryAnimation:(BOOL)shouldAnimate{
-    [[self lowBatteryIndicatorView] setAlpha:1.0f];
-    if (shouldAnimate) {
+    //[[self lowBatteryIndicatorView] setAlpha:1.0f];
+    
+    if (shouldAnimate && ![self batteryIndicatorTapped]) {
         if (NSClassFromString(@"NSBlockOperation")) {
             //animate with blocks
             [UIView animateWithDuration:kTransitionDuration 
-                                  delay:0.0f 
-                                options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat 
+                                  delay:1.0f 
+                                options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat | UIViewAnimationOptionAllowUserInteraction
                              animations:^{
-                                 [[self lowBatteryIndicatorView] setAlpha:0.0f];
+                                 [[self lowBatteryIndicatorView] setAlpha:0.75f];
                              }
                              completion:nil
              ];
         }
         else{
             //animate without blocks
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration:kTransitionDuration];
+            [UIView setAnimationRepeatAutoreverses:YES];
+            [UIView setAnimationRepeatCount:INFINITY];
+            [UIView setAnimationDelay:1.0f];
             
+            [[self lowBatteryIndicatorView] setAlpha:0.75f];
+            
+            [UIView commitAnimations];
         }
+    }
+    else{
+        if (NSClassFromString(@"NSBlockOperation")) {
+            [UIView animateWithDuration:kTransitionDuration/2 
+                                  delay:0.0f 
+                                options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseIn
+                             animations:^{
+                                 [[self lowBatteryIndicatorView] setAlpha:0.0f];
+                             }
+                             completion:^(BOOL finished){
+                                 [[self lowBatteryIndicatorView] setAlpha:0.0f];
+                             }
+             ];
+        }
+        else{
+            [UIView beginAnimations:nil context:nil];
+            [UIView setAnimationDuration:kTransitionDuration/2];
+            [UIView setAnimationBeginsFromCurrentState:YES];
+            [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
+            
+            [[self lowBatteryIndicatorView] setAlpha:0.0f];
+            
+            [UIView commitAnimations];
+        }
+    }
+}
+
+- (void)handleLowBatteryAlertTap{
+    [self setLowBatteryAnimation:NO];
+    [self setBatteryIndicatorTapped:YES];
+    /*if ([[UIApplication sharedApplication] isIdleTimerDisabled]) {
+        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    }*/
+}
+
+- (void)batteryStateChanged{
+    //set battery warning animation when battery is 10% or less and unplugged
+    if ([[UIDevice currentDevice] batteryLevel] <= 0.15 &&
+        [[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateUnplugged) {
+        //set battery warning animation
+        [self setLowBatteryAnimation:YES];
+    }
+    else{
+        [self setLowBatteryAnimation:NO];
+    }
+    
+    //turn off idle timer if battery is 5% or less and device is unplugged
+    if ([[UIDevice currentDevice] batteryLevel] <= 0.10 &&
+        [[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateUnplugged) {
+        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
+    }
+    else{
+        [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     }
 }
 

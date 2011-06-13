@@ -49,6 +49,7 @@
     [self setWillBackground:NO];
     
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
@@ -70,6 +71,8 @@
      */
     NSLog(@"Did Enter Background");
     [self setIsBackgrounded:YES];
+    [[[self viewController] lowBatteryIndicatorView] setAlpha:0.0f];
+    [(Light_ViewController *)[self viewController] setBatteryIndicatorTapped:NO];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -103,7 +106,7 @@
     
     NSLog(@":: Application did become active");
 
-    if ([self willBackground]) {
+    if ([self willBackground] && ![self isBackgrounded]) {
 #if !TARGET_IPHONE_SIMULATOR
         if ([self hasFlash]) {
             if (![self torch]) {
@@ -116,9 +119,20 @@
         }
 #endif
     }
+    else if(![self isBackgrounded]){
+        //setup battery observers when app is launched for the first time only
+        [[UIDevice currentDevice] setBatteryMonitoringEnabled:YES];
+        [[NSNotificationCenter defaultCenter] addObserver:[self viewController] selector:@selector(batteryStateChanged) name:@"UIDeviceBatteryLevelDidChangeNotification" object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:[self viewController] selector:@selector(batteryStateChanged) name:@"UIDeviceBatteryStateDidChangeNotification" object:nil];
+    }
+    
+    if ([self isBackgrounded] || [self willBackground]) {
+        [[self viewController] randomizeBackgroundAnimated:YES];
+    }
+    
+    [[self viewController] batteryStateChanged];
     [self setWillBackground:NO];
     [self setIsBackgrounded:NO];
-    [(Light_ViewController *)[self viewController] randomizeBackgroundAnimated:YES];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -132,6 +146,9 @@
 
 - (void)dealloc
 {
+    [[NSNotificationCenter defaultCenter] removeObserver:[self viewController] name:@"UIDeviceBatteryLevelDidChangeNotification" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:[self viewController] name:@"UIDeviceBatteryStateDidChangeNotification" object:nil];
+    
     [_window release];
     [_viewController release];
     [_torch release];
