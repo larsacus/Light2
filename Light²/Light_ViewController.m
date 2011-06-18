@@ -3,7 +3,7 @@
 //  Light²
 //
 //  Created by Lars Anderson on 6/1/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Copyright 2011 Lars Anderson. All rights reserved.
 //
 
 #import "Light_ViewController.h"
@@ -11,6 +11,9 @@
 #import <QuartzCore/QuartzCore.h>
 
 #define kTransitionDuration 1.5
+#define kBatteryAlert 0.85
+#define kBatteryCritical 0.10
+#define kBatteryAlertTransparency 1.0f
 
 @implementation Light_ViewController
 
@@ -56,8 +59,8 @@
         [[[self lowBatteryIndicatorView] layer] setBackgroundColor:[[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.25f] CGColor]];
     }
     [[[self lowBatteryIndicatorView] layer] setCornerRadius:10.0f];
-    [[self lowBatteryText] setText:NSLocalizedString(@"Low Battery", @"Low battery indicator text")];
-    [[self lowBatteryText] setShadowOffset:CGSizeMake(0.0f, 1.0f)];
+    [[self lowBatteryText] setText:NSLocalizedString(@"lowBatteryAlert", @"Low battery indicator text")];
+    [[self lowBatteryText] setShadowOffset:CGSizeMake(0.0f, 2.0f)];
     
     if ([(Light_AppDelegate *)[[UIApplication sharedApplication] delegate] hasFlash]){
         //device has flash
@@ -72,7 +75,6 @@
                         @"blackmamba.png",
                         @"padded.png",
                         @"black_linen.png",
-                        @"random_grey_variations.png",
                         nil];
     }
     else{
@@ -166,7 +168,6 @@
         }
     }
     else{
-        //NSLog(@"image name: %@", [[self imagesArray] objectAtIndex:rand]);
         [[self imageView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:[[self imagesArray] objectAtIndex:rand]]]];
     }
     
@@ -183,7 +184,7 @@
                                   delay:1.0f 
                                 options:UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat | UIViewAnimationOptionAllowUserInteraction
                              animations:^{
-                                 [[self lowBatteryIndicatorView] setAlpha:0.75f];
+                                 [[self lowBatteryIndicatorView] setAlpha:kBatteryAlertTransparency];
                              }
                              completion:nil
              ];
@@ -196,7 +197,7 @@
             [UIView setAnimationRepeatCount:INFINITY];
             [UIView setAnimationDelay:1.0f];
             
-            [[self lowBatteryIndicatorView] setAlpha:0.75f];
+            [[self lowBatteryIndicatorView] setAlpha:kBatteryAlertTransparency];
             
             [UIView commitAnimations];
         }
@@ -230,14 +231,11 @@
 - (void)handleLowBatteryAlertTap{
     [self setLowBatteryAnimation:NO];
     [self setBatteryIndicatorTapped:YES];
-    /*if ([[UIApplication sharedApplication] isIdleTimerDisabled]) {
-        [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
-    }*/
 }
 
 - (void)batteryStateChanged{
     //set battery warning animation when battery is 10% or less and unplugged
-    if ([[UIDevice currentDevice] batteryLevel] <= 0.15 &&
+    if ([[UIDevice currentDevice] batteryLevel] <= kBatteryAlert &&
         [[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateUnplugged) {
         //set battery warning animation
         [self setLowBatteryAnimation:YES];
@@ -247,7 +245,7 @@
     }
     
     //turn off idle timer if battery is 5% or less and device is unplugged
-    if ([[UIDevice currentDevice] batteryLevel] <= 0.10 &&
+    if ([[UIDevice currentDevice] batteryLevel] <= kBatteryCritical &&
         [[UIDevice currentDevice] batteryState] == UIDeviceBatteryStateUnplugged) {
         [[UIApplication sharedApplication] setIdleTimerDisabled:NO];
     }
