@@ -127,7 +127,7 @@
     }
     
     if ([self isBackgrounded] || [self willBackground]) {
-        [[self viewController] randomizeBackgroundAnimated:YES];
+        [[self viewController] randomizeBackgroundAnimated:YES withDuration:1.5f];
     }
     
     [[self viewController] batteryStateChanged];
