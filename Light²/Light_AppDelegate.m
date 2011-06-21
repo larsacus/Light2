@@ -83,7 +83,7 @@
     NSLog(@":: Application Will Enter Foreground");
     if ([self isBackgrounded]) {
         #if !TARGET_IPHONE_SIMULATOR
-            if ([self hasFlash]) {
+            if ([self hasFlash] && ![[self viewController] isSwapped]) {
                 if (![self torch]) {
                     NSLog(@"Starting flashlight session");
                     _torch = [[LATorch alloc] initWithTorchOn:YES];
@@ -108,7 +108,7 @@
 
     if ([self willBackground] && ![self isBackgrounded]) {
 #if !TARGET_IPHONE_SIMULATOR
-        if ([self hasFlash]) {
+        if ([self hasFlash] && ![[self viewController] isSwapped]) {
             if (![self torch]) {
                 NSLog(@"Starting flashlight session");
                 _torch = [[LATorch alloc] initWithTorchOn:YES];

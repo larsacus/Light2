@@ -46,6 +46,5 @@
 - (void)handleLowBatteryAlertTap;
 - (void)swapLightType;
 - (void)showDoubleTapHintAnimated:(BOOL)animated;
-- (void)hideDoubleTapHintAnimated;
 
 @end

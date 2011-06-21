@@ -16,6 +16,12 @@
 #define kFastAnimationDuration 0.25f
 #define kHintDisplayTime 3.0f
 
+#ifdef DEBUG  
+#define DebugLog(args...) _DebugLog(__FILE__,__LINE__,args);  
+#else  
+#define DebugLog(x...)  
+#endif 
+
 @implementation Light_ViewController
 
 @synthesize imageView                   = _imageView;
@@ -86,7 +92,7 @@
     
     if ([[self delegate] hasFlash]){
         //device has flash
-        //init array with dark images
+        //dark images only used on devices without flash
         _darkImagesArray = [[NSArray alloc] initWithObjects:
                         @"carbon_fibre.png",
                         @"tactile_noise.png",
@@ -104,7 +110,8 @@
         
         [self setCanSwap:YES];
     }
-        
+    
+    //light images always created regardless of flash availability
     _lightImagesArray = [[NSArray alloc] initWithObjects:
                          @"45degree_fabric.png",
                          @"fabric_1.png",
@@ -149,7 +156,9 @@
             //want mutually exclusive tap events (e.g. only want either single-tap or double-tap to fire, but not both)
             [hintGesture requireGestureRecognizerToFail:doubleTapGesture];
             
+            [[self transitionView] setGestureRecognizers:[NSArray arrayWithObjects:doubleTapGesture, hintGesture, nil]];
             [[self imageView] setGestureRecognizers:[NSArray arrayWithObjects: doubleTapGesture, hintGesture, nil]];
+            [[self transitionView] setUserInteractionEnabled:YES];
             [[self imageView] setUserInteractionEnabled:YES];
             
             [hintGesture release];
@@ -178,13 +187,10 @@
 }
 
 - (void)randomizeBackgroundAnimated:(BOOL)animated withDuration:(float)duration{
+    NSLog(@"Randomizing background");
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     int rand;
     NSString *imageName;
-    
-    if (!duration) {
-        duration = kTransitionDuration;
-    }
     
     if ([self canSwap] && ![self isSwapped]) {
         //use dark images
@@ -197,38 +203,38 @@
         imageName = [[self lightImagesArray] objectAtIndex:rand];
     }
     
-    if (animated) {
+    NSLog(@"Image Name: %@", imageName);
+    
+    if (animated && NSClassFromString(@"NSBlockOperation")) {
         //change transition image
         [[self transitionView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:imageName]]];
         
-        if (NSClassFromString(@"NSBlockOperation")) {
-            [UIView animateWithDuration:duration
-                                  delay:0.0 
-                                options:UIViewAnimationOptionCurveEaseIn 
-                             animations:^{
-                                 //fade in transition image to opaque
-                                 [[self transitionView] setAlpha:1.0f];
-                             }
-                             completion:^(BOOL finished){
-                                 //set main image to transition image
+        //fade in transition image
+        [UIView animateWithDuration:duration
+                              delay:0.0 
+                            options:UIViewAnimationOptionCurveEaseIn | 
+                                    UIViewAnimationOptionBeginFromCurrentState | 
+                                    UIViewAnimationOptionAllowUserInteraction
+                         animations:^{
+                             //fade in transition image to opaque
+                             [[self transitionView] setAlpha:1.0f];
+                         }
+                         completion:^(BOOL finished){
+                             //set main image to transition image
+                             if (finished) {
+                                 NSLog(@"Animation finished!");
                                  [[self imageView] setBackgroundColor:[[self transitionView] backgroundColor]];
                                  
                                  //set transition image opacity to 0% to prep for new image
                                  [[self transitionView] setAlpha:0.0f];
                                  [[self transitionView] setBackgroundColor:nil];
                              }
-             ];
-        }
-        else{
-            //system cannot use block animations, use older non-block animations instead
-            [UIView beginAnimations:@"image_transition" context:nil];
-            [UIView setAnimationCurve:UIViewAnimationCurveEaseIn];
-            [UIView setAnimationDuration:duration];
-            
-            [[self transitionView] setAlpha:1.0f];
-            
-            [UIView commitAnimations];
-        }
+                             else{
+                                 NSLog(@"Animation did not finish!");
+                             }
+                             
+                         }
+         ];
     }
     else{
         [[self imageView] setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:imageName]]];
@@ -337,7 +343,7 @@
 }
 
 - (void)singleTap{
-    if ([self tapCount] >= 2) {
+    if ([self tapCount] >= 1) {
         //display double-tap hint
         [self showDoubleTapHintAnimated:YES];
         self.tapCount = 0;
@@ -352,21 +358,15 @@
             //animate with blocks
             [UIView animateWithDuration:kFastAnimationDuration
                                   delay:0.0f
-                                options:UIViewAnimationOptionCurveEaseOut
+                                options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction
                              animations:^{
                                  [[self tapHintLabel] setAlpha:1.0f];
                              }
                              completion:^(BOOL completed){
                                  NSLog(@"Calling timer");
-                                 /*[NSTimer timerWithTimeInterval:kHintDisplayTime
-                                                         target:self 
-                                                       selector:@selector(hideDoubleTapHintAnimated)
-                                                       userInfo:nil
-                                                        repeats:NO
-                                  ];*/
                                  [UIView animateWithDuration:kHintDisplayTime
                                                        delay:0.0f
-                                                     options:UIViewAnimationOptionCurveEaseOut
+                                                     options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction
                                                   animations:^{
                                                       [[self tapHintLabel] setAlpha:0.0f];
                                                   }
@@ -383,19 +383,6 @@
                                        selector:@selector(hideDoubleTapHintAnimated)
                                        userInfo:nil
                                         repeats:NO
-         ];
-    }
-}
-
-- (void)hideDoubleTapHintAnimated{
-    if (NSClassFromString(@"NSBlockOperation")) {
-        [UIView animateWithDuration:kTransitionDuration
-                              delay:0.0f
-                            options:UIViewAnimationOptionCurveEaseOut
-                         animations:^{
-                             [[self tapHintLabel] setAlpha:0.0f];
-                         }
-                         completion:nil
          ];
     }
 }
