@@ -12,15 +12,9 @@
 #define kTransitionDuration 1.5
 #define kBatteryAlert 0.15
 #define kBatteryCritical 0.10
-#define kBatteryAlertTransparency 1.0f
-#define kFastAnimationDuration 0.25f
+#define kBatteryAlertTransparency 0.50f
+#define kFastAnimationDuration 0.15f
 #define kHintDisplayTime 3.0f
-
-#ifdef DEBUG  
-#define DebugLog(args...) _DebugLog(__FILE__,__LINE__,args);  
-#else  
-#define DebugLog(x...)  
-#endif 
 
 @implementation Light_ViewController
 
@@ -68,18 +62,18 @@
     //[[UIScreen mainScreen] setBrightness:0.1f]; //sets screen brightness to 10% (iOS 5.0+ only)
     
     //configure low battery indicator view
-    if ([[self delegate] hasFlash]) {
+    /*if ([[self delegate] hasFlash]) {
         //no flash - make dark-colored scheme for alert
         [[[self lowBatteryIndicatorView] layer] setBackgroundColor:[[UIColor colorWithRed:255.0f green:255.0f blue:255.0f alpha:0.25f] CGColor]];
     }
     else{
         //has flash - make light-colored scheme for alert
         [[[self lowBatteryIndicatorView] layer] setBackgroundColor:[[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.25f] CGColor]];
-    }
+    }*/
     [[[self lowBatteryIndicatorView] layer] setCornerRadius:10.0f];
     [[self lowBatteryText] setText:NSLocalizedString(@"lowBatteryAlert", @"Low battery indicator text")];
-    [[self lowBatteryText] setShadowColor:[UIColor whiteColor]];
-    [[self lowBatteryText] setShadowOffset:CGSizeMake(0.0f, -1.0f)];
+    //[[self lowBatteryText] setShadowColor:[UIColor whiteColor]];
+    //[[self lowBatteryText] setShadowOffset:CGSizeMake(0.0f, -1.0f)];
     
     [[self tapHintLabel] setText:NSLocalizedString(@"tapHintLabel",@"Hints to users to double-tap to swap light functions")];
     
@@ -247,7 +241,6 @@
 #pragma mark Battery Monitors
 
 - (void)setLowBatteryAnimation:(BOOL)shouldAnimate{
-    //[[self lowBatteryIndicatorView] setAlpha:1.0f];
     
     if (shouldAnimate && ![self batteryIndicatorTapped]) {
         if (NSClassFromString(@"NSBlockOperation")) {
