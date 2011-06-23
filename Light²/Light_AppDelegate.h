@@ -25,4 +25,6 @@
 @property (nonatomic, assign) BOOL isBackgrounded;
 @property (nonatomic, assign) BOOL willBackground;
 
+- (void)createNewTorchSession;
+
 @end

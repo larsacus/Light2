@@ -11,6 +11,9 @@
 #include <sys/types.h>
 #include <sys/sysctl.h>
 
+#define ON YES
+#define OFF NO
+
 @implementation LATorch
 
 @synthesize systemVersion = _systemVersion;
@@ -18,6 +21,8 @@
 @synthesize torchDevice = _torchDevice;
 @synthesize torchDeviceInput = _torchDeviceInput;
 @synthesize torchOutput = _torchOutput;
+@synthesize delegate = _delegate;
+@synthesize torchStateOnResume = _torchStateOnResume;
 
 - (id)init{
     return [self initWithTorchOn:NO];
@@ -37,7 +42,7 @@
                                                  name:AVCaptureSessionInterruptionEndedNotification
                                                object:nil
      ];
-    
+    [self setTorchStateOnResume:ON];   
     return self;
 }
 
@@ -180,7 +185,7 @@
 
 -(void)flashlightSessionResumeFromInturrupt{
 	//NSLog(@"Flashlight is resuming from inturruption");
-    [self verifyTorchSubsystemsWithTorchOn:YES];
+    [self verifyTorchSubsystemsWithTorchOn:[self torchStateOnResume]];
 }
 
 - (void)dealloc{

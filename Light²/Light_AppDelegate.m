@@ -30,7 +30,7 @@
     if ([AVCaptureSession class] && 
         [[AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo] hasFlash]
         ) {
-        _torch = [[LATorch alloc] initWithTorchOn:YES];
+        [self createNewTorchSession];
         [self setHasFlash:YES];
     }
     else{
@@ -81,12 +81,17 @@
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
     NSLog(@":: Application Will Enter Foreground");
+    NSLog(@"isSwapped? %@", [[self viewController] isSwapped] ? @"YES" : @"NO");
+    NSLog(@"isBackgrounded? %@", [self isBackgrounded]  ? @"YES" : @"NO");
+    
+    //fully backgrounded
     if ([self isBackgrounded]) {
         #if !TARGET_IPHONE_SIMULATOR
             if ([self hasFlash] && ![[self viewController] isSwapped]) {
+                NSLog(@"turning flash on!");
                 if (![self torch]) {
                     NSLog(@"Starting flashlight session");
-                    _torch = [[LATorch alloc] initWithTorchOn:YES];
+                    [self createNewTorchSession];
                 }
                 else{
                     [[self torch] setTorchOn:YES];
@@ -105,13 +110,18 @@
      */
     
     NSLog(@":: Application did become active");
+    NSLog(@"isSwapped? %@", [[self viewController] isSwapped] ? @"YES" : @"NO");
+    NSLog(@"willBackground? %@", [self willBackground] ? @"YES" : @"NO");
+    NSLog(@"isBackgrounded? %@", [self isBackgrounded] ? @"YES" : @"NO");
 
+    //in a transition state, but not fully backgrounded yet
     if ([self willBackground] && ![self isBackgrounded]) {
 #if !TARGET_IPHONE_SIMULATOR
         if ([self hasFlash] && ![[self viewController] isSwapped]) {
+            NSLog(@"turning flash on!");
             if (![self torch]) {
                 NSLog(@"Starting flashlight session");
-                _torch = [[LATorch alloc] initWithTorchOn:YES];
+                [self createNewTorchSession];
             }
             else{
                 [[self torch] setTorchOn:YES];
@@ -133,6 +143,11 @@
     [[self viewController] batteryStateChanged];
     [self setWillBackground:NO];
     [self setIsBackgrounded:NO];
+}
+
+- (void)createNewTorchSession{
+    _torch = [[LATorch alloc] initWithTorchOn:YES];
+    [[self torch] setDelegate:self];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

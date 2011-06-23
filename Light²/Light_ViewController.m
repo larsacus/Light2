@@ -324,6 +324,7 @@
 - (void)swapLightType{
     if ([self canSwap]){
         [[[self delegate] torch] setTorchOn:[self isSwapped]];
+        [[[[[self delegate] torch] delegate] torch] setTorchStateOnResume:![[[[[self delegate] torch] delegate] torch] torchStateOnResume]];
         [self setSwapped:![self isSwapped]];
         
         //swap shadow color and text color

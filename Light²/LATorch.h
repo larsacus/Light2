@@ -18,6 +18,8 @@
     AVCaptureDevice *_torchDevice;
     AVCaptureDeviceInput *_torchDeviceInput;
     AVCaptureOutput *_torchOutput;
+    id _delegate;
+    BOOL _torchStateOnResume;
 #endif
     
 }
@@ -28,6 +30,8 @@
 @property (nonatomic, retain) AVCaptureDevice *torchDevice;
 @property (nonatomic, retain) AVCaptureDeviceInput *torchDeviceInput;
 @property (nonatomic, retain) AVCaptureOutput *torchOutput;
+@property (nonatomic, retain) id delegate;
+@property (nonatomic) BOOL torchStateOnResume;
 #endif
 
 - (id)initWithTorchOn:(BOOL)torchOn;
