@@ -16,11 +16,14 @@
 
 @implementation LATorch
 
+
 @synthesize systemVersion = _systemVersion;
+#if !TARGET_IPHONE_SIMULATOR
 @synthesize torchSession = _torchSession;
 @synthesize torchDevice = _torchDevice;
 @synthesize torchDeviceInput = _torchDeviceInput;
 @synthesize torchOutput = _torchOutput;
+#endif
 @synthesize delegate = _delegate;
 @synthesize torchStateOnResume = _torchStateOnResume;
 
@@ -36,27 +39,40 @@
         
         [self setTorchOn:torchOn];
     }
-    
+#if !TARGET_IPHONE_SIMULATOR
     [[NSNotificationCenter defaultCenter] addObserver:self 
                                              selector:@selector(flashlightSessionResumeFromInturrupt) 
                                                  name:AVCaptureSessionInterruptionEndedNotification
                                                object:nil
      ];
+#endif
     [self setTorchStateOnResume:ON];   
     return self;
 }
 
 - (BOOL)isTorchOn{
+#if !TARGET_IPHONE_SIMULATOR
+    if ([self systemVersion] >= 5.0) {
+        //>5.0 doesn't require AVCaptureSession
+        return [[self torchDevice] torchMode] == AVCaptureTorchModeOn;
+    }
     return  [[self torchSession] isRunning] && 
             ([[self torchDevice] torchMode] == AVCaptureTorchModeOn);
+#else
+    return NO;
+#endif
 }
 
 - (BOOL)isInturrupted{
+#if !TARGET_IPHONE_SIMULATOR
     return [[self torchSession] isInterrupted];
+#else
+    return NO;
+#endif
 }
 
 - (void)setTorchOn:(BOOL)torchOn{
-    
+#if !TARGET_IPHONE_SIMULATOR
     if (![self torchSession] && ([self systemVersion] < 5.0f)) {
         NSLog(@"Creating session");
         _torchSession = [[AVCaptureSession alloc] init];
@@ -141,9 +157,11 @@
             NSLog(@"Session is already started or session does not need to exist");
         }
     }
+#endif
 }
 
 - (void)verifyTorchSubsystemsWithTorchOn:(BOOL)torchOn{
+#if !TARGET_IPHONE_SIMULATOR
     //session
     if (![self torchDevice]) {
         _torchDevice = [AVCaptureDevice defaultDeviceWithMediaType:AVMediaTypeVideo];
@@ -181,23 +199,26 @@
             }
         }
     }
+#endif
 }
 
 -(void)flashlightSessionResumeFromInturrupt{
 	//NSLog(@"Flashlight is resuming from inturruption");
-    [self verifyTorchSubsystemsWithTorchOn:[self torchStateOnResume]];
+    [self setTorchOn:[self torchStateOnResume]];
 }
 
 - (void)dealloc{
+#if !TARGET_IPHONE_SIMULATOR
     [_torchDevice release];
     [_torchDeviceInput release];
     [_torchOutput release];
+
     
     if ([[self torchSession] isRunning]) {
         [[self torchSession] stopRunning];
     }
     [_torchSession release];
-    
+#endif
     [super dealloc];
 }
 

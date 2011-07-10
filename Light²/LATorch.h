@@ -12,27 +12,31 @@
 @interface LATorch : NSObject {
     
 @private
-#if !TARGET_IPHONE_SIMULATOR
+
     float _systemVersion;
+#if !TARGET_IPHONE_SIMULATOR
     AVCaptureSession *_torchSession;
     AVCaptureDevice *_torchDevice;
     AVCaptureDeviceInput *_torchDeviceInput;
     AVCaptureOutput *_torchOutput;
+#endif
     id _delegate;
     BOOL _torchStateOnResume;
-#endif
+
     
 }
 
-#if !TARGET_IPHONE_SIMULATOR
+
 @property (nonatomic) float systemVersion;
+#if !TARGET_IPHONE_SIMULATOR
 @property (nonatomic, retain) AVCaptureSession *torchSession;
 @property (nonatomic, retain) AVCaptureDevice *torchDevice;
 @property (nonatomic, retain) AVCaptureDeviceInput *torchDeviceInput;
 @property (nonatomic, retain) AVCaptureOutput *torchOutput;
+#endif
 @property (nonatomic, retain) id delegate;
 @property (nonatomic) BOOL torchStateOnResume;
-#endif
+
 
 - (id)initWithTorchOn:(BOOL)torchOn;
 - (void)setTorchOn:(BOOL)torchOn;
