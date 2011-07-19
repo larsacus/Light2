@@ -14,6 +14,8 @@
 #define ON YES
 #define OFF NO
 
+#define NSLog //NSLog
+
 @implementation LATorch
 
 
