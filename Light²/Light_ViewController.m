@@ -3,7 +3,7 @@
 //  Light²
 //
 //  Created by Lars Anderson on 6/1/11.
-//  Copyright 2011 Lars Anderson. All rights reserved.
+//  Copyright 2011 Lars Anderson, drink&apple. All rights reserved.
 //
 
 #import "Light_ViewController.h"

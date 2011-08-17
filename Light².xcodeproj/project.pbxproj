@@ -48,7 +48,6 @@
 		46AFD1461397292F00654864 /* Light_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 46AFD1451397292F00654864 /* Light_ViewController.m */; };
 		46AFD1491397292F00654864 /* Light_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD1471397292F00654864 /* Light_ViewController.xib */; };
 		46AFD16B1397294700654864 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 46AFD1691397294600654864 /* MainWindow-iPad.xib */; };
-		46E42816139ABF4A004CA035 /* LATorch.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E42815139ABF4A004CA035 /* LATorch.m */; };
 		46E4281F139AC151004CA035 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46E4281E139AC151004CA035 /* AVFoundation.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		46E42821139C6C0E004CA035 /* light_honeycomb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E42820139C6C0E004CA035 /* light_honeycomb@2x.png */; };
 		46E42830139C6DF1004CA035 /* 45degree_fabric@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E42823139C6DF1004CA035 /* 45degree_fabric@2x.png */; };
@@ -64,6 +63,7 @@
 		46E4283A139C6DF1004CA035 /* handmadepaper@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E4282D139C6DF1004CA035 /* handmadepaper@2x.png */; };
 		46E4283B139C6DF1004CA035 /* rockywall@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E4282E139C6DF1004CA035 /* rockywall@2x.png */; };
 		46E4283C139C6DF1004CA035 /* double_lined@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46E4282F139C6DF1004CA035 /* double_lined@2x.png */; };
+		46E6FDD813FB5FD00025B141 /* LARSTorch.m in Sources */ = {isa = PBXBuildFile; fileRef = 46E6FDD713FB5FD00025B141 /* LARSTorch.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -130,8 +130,6 @@
 		46AFD15C1397293000654864 /* Light_Tests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Light_Tests.h; sourceTree = "<group>"; };
 		46AFD15E1397293000654864 /* Light_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Light_Tests.m; sourceTree = "<group>"; };
 		46AFD16A1397294700654864 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/MainWindow-iPad.xib"; sourceTree = "<group>"; };
-		46E42814139ABF4A004CA035 /* LATorch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LATorch.h; sourceTree = "<group>"; };
-		46E42815139ABF4A004CA035 /* LATorch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LATorch.m; sourceTree = "<group>"; };
 		46E4281E139AC151004CA035 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		46E42820139C6C0E004CA035 /* light_honeycomb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "light_honeycomb@2x.png"; sourceTree = "<group>"; };
 		46E42823139C6DF1004CA035 /* 45degree_fabric@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "45degree_fabric@2x.png"; sourceTree = "<group>"; };
@@ -147,6 +145,8 @@
 		46E4282D139C6DF1004CA035 /* handmadepaper@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "handmadepaper@2x.png"; sourceTree = "<group>"; };
 		46E4282E139C6DF1004CA035 /* rockywall@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "rockywall@2x.png"; sourceTree = "<group>"; };
 		46E4282F139C6DF1004CA035 /* double_lined@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "double_lined@2x.png"; sourceTree = "<group>"; };
+		46E6FDD613FB5FCF0025B141 /* LARSTorch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LARSTorch.h; path = "../../../Open Source/LARSTorch/LARSTorch.h"; sourceTree = "<group>"; };
+		46E6FDD713FB5FD00025B141 /* LARSTorch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LARSTorch.m; path = "../../../Open Source/LARSTorch/LARSTorch.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,8 +270,7 @@
 				46AFD1681397293F00654864 /* iPad */,
 				46AFD13E1397292F00654864 /* Light_AppDelegate.h */,
 				46AFD13F1397292F00654864 /* Light_AppDelegate.m */,
-				46E42814139ABF4A004CA035 /* LATorch.h */,
-				46E42815139ABF4A004CA035 /* LATorch.m */,
+				46E6FDD913FB5FD80025B141 /* LARSTorch */,
 				46AFD1411397292F00654864 /* MainWindow.xib */,
 				46AFD1441397292F00654864 /* Light_ViewController.h */,
 				46AFD1451397292F00654864 /* Light_ViewController.m */,
@@ -342,6 +341,15 @@
 				46A95C4413A05DAB00B0F1A5 /* Retina */,
 			);
 			name = Light;
+			sourceTree = "<group>";
+		};
+		46E6FDD913FB5FD80025B141 /* LARSTorch */ = {
+			isa = PBXGroup;
+			children = (
+				46E6FDD613FB5FCF0025B141 /* LARSTorch.h */,
+				46E6FDD713FB5FD00025B141 /* LARSTorch.m */,
+			);
+			name = LARSTorch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -463,7 +471,7 @@
 				46AFD13D1397292F00654864 /* main.m in Sources */,
 				46AFD1401397292F00654864 /* Light_AppDelegate.m in Sources */,
 				46AFD1461397292F00654864 /* Light_ViewController.m in Sources */,
-				46E42816139ABF4A004CA035 /* LATorch.m in Sources */,
+				46E6FDD813FB5FD00025B141 /* LARSTorch.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

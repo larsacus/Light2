@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LATorch.h"
+#import "LARSTorch.h"
 
 @class Light_ViewController;
 
 @interface Light_AppDelegate : NSObject <UIApplicationDelegate> {
-    LATorch *_torch;
+    LARSTorch *_torch;
     BOOL _hasFlash;
     BOOL _isBackgrounded;
     BOOL _willBackground;
@@ -20,7 +20,7 @@
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 @property (nonatomic, retain) IBOutlet Light_ViewController *viewController;
-@property (nonatomic, retain) LATorch *torch;
+@property (nonatomic, retain) LARSTorch *torch;
 @property (nonatomic, assign) BOOL hasFlash;
 @property (nonatomic, assign) BOOL isBackgrounded;
 @property (nonatomic, assign) BOOL willBackground;

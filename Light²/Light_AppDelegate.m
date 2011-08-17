@@ -146,7 +146,7 @@
 }
 
 - (void)createNewTorchSession{
-    _torch = [[LATorch alloc] initWithTorchOn:YES];
+    _torch = [[LARSTorch alloc] initWithTorchOn:YES];
     [[self torch] setDelegate:self];
 }
 
