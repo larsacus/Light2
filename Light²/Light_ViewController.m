@@ -8,6 +8,7 @@
 
 #import "Light_ViewController.h"
 #import <QuartzCore/QuartzCore.h>
+#import "FlurryAPI.h"
 
 #define kTransitionDuration 1.5
 #define kBatteryAlert 0.15
@@ -61,19 +62,8 @@
     [super viewDidLoad];
     //[[UIScreen mainScreen] setBrightness:0.1f]; //sets screen brightness to 10% (iOS 5.0+ only)
     
-    //configure low battery indicator view
-    /*if ([[self delegate] hasFlash]) {
-        //no flash - make dark-colored scheme for alert
-        [[[self lowBatteryIndicatorView] layer] setBackgroundColor:[[UIColor colorWithRed:255.0f green:255.0f blue:255.0f alpha:0.25f] CGColor]];
-    }
-    else{
-        //has flash - make light-colored scheme for alert
-        [[[self lowBatteryIndicatorView] layer] setBackgroundColor:[[UIColor colorWithRed:0.0f green:0.0f blue:0.0f alpha:0.25f] CGColor]];
-    }*/
     [[[self lowBatteryIndicatorView] layer] setCornerRadius:10.0f];
     [[self lowBatteryText] setText:NSLocalizedString(@"lowBatteryAlert", @"Low battery indicator text")];
-    //[[self lowBatteryText] setShadowColor:[UIColor whiteColor]];
-    //[[self lowBatteryText] setShadowOffset:CGSizeMake(0.0f, -1.0f)];
     
     [[self tapHintLabel] setText:NSLocalizedString(@"tapHintLabel",@"Hints to users to double-tap to swap light functions")];
     
@@ -181,7 +171,7 @@
 }
 
 - (void)randomizeBackgroundAnimated:(BOOL)animated withDuration:(float)duration{
-    NSLog(@"Randomizing background");
+//    NSLog(@"Randomizing background");
     NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
     int rand;
     NSString *imageName;
@@ -197,7 +187,7 @@
         imageName = [[self lightImagesArray] objectAtIndex:rand];
     }
     
-    NSLog(@"Image Name: %@", imageName);
+//    NSLog(@"Image Name: %@", imageName);
     
     if (animated && NSClassFromString(@"NSBlockOperation")) {
         //change transition image
@@ -224,7 +214,7 @@
                                  [[self transitionView] setBackgroundColor:nil];
                              }
                              else{
-                                 NSLog(@"Animation did not finish!");
+//                                 NSLog(@"Animation did not finish!");
                              }
                              
                          }
@@ -243,6 +233,7 @@
 - (void)setLowBatteryAnimation:(BOOL)shouldAnimate{
     
     if (shouldAnimate && ![self batteryIndicatorTapped]) {
+        [FlurryAPI logEvent:@"Low Battery Alert Displayed"];
         if (NSClassFromString(@"NSBlockOperation")) {
             //animate with blocks
             [UIView animateWithDuration:kTransitionDuration 
@@ -294,6 +285,7 @@
 }
 
 - (void)handleLowBatteryAlertTap{
+    [FlurryAPI logEvent:@"Low Battery Alert Tapped"];
     [self setLowBatteryAnimation:NO];
     [self setBatteryIndicatorTapped:YES];
 }
@@ -323,6 +315,7 @@
 
 - (void)swapLightType{
     if ([self canSwap]){
+        [FlurryAPI logEvent:@"Toggling Light Mode"];
         [[[self delegate] torch] setTorchOn:[self isSwapped]];
         [[[[[self delegate] torch] delegate] torch] setTorchStateOnResume:![[[[[self delegate] torch] delegate] torch] torchStateOnResume]];
         [self setSwapped:![self isSwapped]];
@@ -347,6 +340,7 @@
 }
 
 - (void)showDoubleTapHintAnimated:(BOOL)animated{
+    [FlurryAPI logEvent:@"Double-Tap Hint Displayed"];
     if (animated) {
         if (NSClassFromString(@"NSBlockOperation")) {
             //animate with blocks
@@ -357,7 +351,7 @@
                                  [[self tapHintLabel] setAlpha:1.0f];
                              }
                              completion:^(BOOL completed){
-                                 NSLog(@"Calling timer");
+//                                 NSLog(@"Calling timer");
                                  [UIView animateWithDuration:kHintDisplayTime
                                                        delay:0.0f
                                                      options:UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionAllowUserInteraction

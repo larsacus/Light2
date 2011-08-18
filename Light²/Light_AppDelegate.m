@@ -7,8 +7,8 @@
 //
 
 #import "Light_AppDelegate.h"
-
 #import "Light_ViewController.h"
+#import "FlurryAPI.h"
 
 @implementation Light_AppDelegate
 
@@ -24,7 +24,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    NSLog(@":: Application did finish launching");
+    //NSLog(@":: Application did finish launching");
+    
+    //[FlurryAPI startSession:@"GFLZ78E55ASGTSTMRV5P"];//production (Light² Pro)
+    [FlurryAPI startSession:@"1KTD3GVFNSSLE1ZMKSFL"];//dev
+    
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
     if ([AVCaptureSession class] && 
@@ -32,10 +36,11 @@
         ) {
         [self createNewTorchSession];
         [self setHasFlash:YES];
+        [FlurryAPI logEvent:@"User Configuration" withParameters:[NSDictionary dictionaryWithObject:@"Yes" forKey:@"Has Flash?"]];
     }
     else{
         [self setHasFlash:NO];
-        NSLog(@"Device does not have flash.  Sad day... :(");
+        [FlurryAPI logEvent:@"User Configuration" withParameters:[NSDictionary dictionaryWithObject:@"No" forKey:@"Has Flash?"]];
     }
     
     if ([self.window respondsToSelector:@selector(setRootViewController)]) {
@@ -80,17 +85,17 @@
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
-    NSLog(@":: Application Will Enter Foreground");
-    NSLog(@"isSwapped? %@", [[self viewController] isSwapped] ? @"YES" : @"NO");
-    NSLog(@"isBackgrounded? %@", [self isBackgrounded]  ? @"YES" : @"NO");
+//    NSLog(@":: Application Will Enter Foreground");
+//    NSLog(@"isSwapped? %@", [[self viewController] isSwapped] ? @"YES" : @"NO");
+//    NSLog(@"isBackgrounded? %@", [self isBackgrounded]  ? @"YES" : @"NO");
     
     //fully backgrounded
     if ([self isBackgrounded]) {
         #if !TARGET_IPHONE_SIMULATOR
             if ([self hasFlash] && ![[self viewController] isSwapped]) {
-                NSLog(@"turning flash on!");
+//                NSLog(@"turning flash on!");
                 if (![self torch]) {
-                    NSLog(@"Starting flashlight session");
+//                    NSLog(@"Starting flashlight session");
                     [self createNewTorchSession];
                 }
                 else{
@@ -109,18 +114,18 @@
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
     
-    NSLog(@":: Application did become active");
-    NSLog(@"isSwapped? %@", [[self viewController] isSwapped] ? @"YES" : @"NO");
-    NSLog(@"willBackground? %@", [self willBackground] ? @"YES" : @"NO");
-    NSLog(@"isBackgrounded? %@", [self isBackgrounded] ? @"YES" : @"NO");
+//    NSLog(@":: Application did become active");
+//    NSLog(@"isSwapped? %@", [[self viewController] isSwapped] ? @"YES" : @"NO");
+//    NSLog(@"willBackground? %@", [self willBackground] ? @"YES" : @"NO");
+//    NSLog(@"isBackgrounded? %@", [self isBackgrounded] ? @"YES" : @"NO");
 
     //in a transition state, but not fully backgrounded yet
     if ([self willBackground] && ![self isBackgrounded]) {
 #if !TARGET_IPHONE_SIMULATOR
         if ([self hasFlash] && ![[self viewController] isSwapped]) {
-            NSLog(@"turning flash on!");
+//            NSLog(@"turning flash on!");
             if (![self torch]) {
-                NSLog(@"Starting flashlight session");
+//                NSLog(@"Starting flashlight session");
                 [self createNewTorchSession];
             }
             else{
