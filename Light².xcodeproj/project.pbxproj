@@ -13,7 +13,6 @@
 		4651A7DC13A717F4002054D0 /* icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4651A7DA13A717F4002054D0 /* icon@2x.png */; };
 		4651A7DF13A7188D002054D0 /* icon-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 4651A7DE13A7188D002054D0 /* icon-iPad.png */; };
 		4651A7FA13AC0261002054D0 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4651A7FC13AC0261002054D0 /* Localizable.strings */; };
-		4696543513A28ADB00DA476E /* libSystem.B.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 4696543413A28ADB00DA476E /* libSystem.B.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		46A5F0CD13FCCEE600D8E33D /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 46A5F0CB13FCCEE600D8E33D /* libFlurry.a */; };
 		46A95C3A13A0431200B0F1A5 /* carbon_fibre@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46A95C3013A0431200B0F1A5 /* carbon_fibre@2x.png */; };
 		46A95C3B13A0431200B0F1A5 /* tactile_noise@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 46A95C3113A0431200B0F1A5 /* tactile_noise@2x.png */; };
@@ -158,7 +157,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				46AED4DC13A32E26005E660E /* QuartzCore.framework in Frameworks */,
-				4696543513A28ADB00DA476E /* libSystem.B.dylib in Frameworks */,
 				46E4281F139AC151004CA035 /* AVFoundation.framework in Frameworks */,
 				46AFD1301397292F00654864 /* UIKit.framework in Frameworks */,
 				46AFD1321397292F00654864 /* Foundation.framework in Frameworks */,
@@ -376,6 +374,7 @@
 				46AFD1271397292F00654864 /* Sources */,
 				46AFD1281397292F00654864 /* Frameworks */,
 				46AFD1291397292F00654864 /* Resources */,
+				466F94491400A78800C91066 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -476,6 +475,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		466F94491400A78800C91066 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "KEYWORDS=\"TODO:|FIXME:|\\?\\?\\?:|\\!\\!\\!:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($KEYWORDS).*\\$\" | perl -p -e \"s/($KEYWORDS)/ warning: \\$1/\"";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		46AFD1271397292F00654864 /* Sources */ = {
