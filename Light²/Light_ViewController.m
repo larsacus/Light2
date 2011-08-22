@@ -11,7 +11,7 @@
 #import "FlurryAPI.h"
 
 #define kTransitionDuration 1.5
-#define kBatteryAlert 0.95
+#define kBatteryAlert 0.15
 #define kBatteryCritical 0.10
 #define kBatteryAlertTransparency 0.50f
 #define kFastAnimationDuration 0.15f
@@ -207,7 +207,7 @@
                          completion:^(BOOL finished){
                              //set main image to transition image
                              if (finished) {
-                                 NSLog(@"Animation finished!");
+                                 //NSLog(@"Animation finished!");
                                  [[self imageView] setBackgroundColor:[[self transitionView] backgroundColor]];
                                  
                                  //set transition image opacity to 0% to prep for new image
