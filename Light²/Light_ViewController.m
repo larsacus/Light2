@@ -9,13 +9,16 @@
 #import "Light_ViewController.h"
 #import <QuartzCore/QuartzCore.h>
 #import "FlurryAPI.h"
+#import "LARSAdController.h"
 
 #define kTransitionDuration 1.5
-#define kBatteryAlert 0.95
+#define kBatteryAlert 0.15
 #define kBatteryCritical 0.10
 #define kBatteryAlertTransparency 0.50f
 #define kFastAnimationDuration 0.15f
 #define kHintDisplayTime 3.0f
+
+#define kGoogleAdId @"a14e5067e22d38b"
 
 @implementation Light_ViewController
 
@@ -151,6 +154,9 @@
     }
     
     [self setBatteryIndicatorTapped:NO];
+    
+    [[LARSAdController sharedManager] addAdContainerToView:self.view withParentViewController:self];
+    [[LARSAdController sharedManager] setGoogleAdPublisherId:kGoogleAdId];
 }
 
 - (void)viewDidUnload

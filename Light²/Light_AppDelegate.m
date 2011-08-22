@@ -23,8 +23,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [FlurryAPI startSession:@"GFLZ78E55ASGTSTMRV5P"];//production (Light² Pro)
-    //[FlurryAPI startSession:@"1KTD3GVFNSSLE1ZMKSFL"];//dev
+    //FIXME: [FlurryAPI startSession:@"ZQLF8RG2A9S4KI67JIDG"];//production (Light² Free)
+    [FlurryAPI startSession:@"E4WRQESDZD4UQFCBBZL5"];//dev
     
     [[UIApplication sharedApplication] setIdleTimerDisabled:YES];
     
