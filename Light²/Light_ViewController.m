@@ -11,7 +11,7 @@
 #import "FlurryAPI.h"
 
 #define kTransitionDuration 1.5
-#define kBatteryAlert 0.15
+#define kBatteryAlert 0.95
 #define kBatteryCritical 0.10
 #define kBatteryAlertTransparency 0.50f
 #define kFastAnimationDuration 0.15f
@@ -167,7 +167,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    //return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return YES;
 }
 
 - (void)randomizeBackgroundAnimated:(BOOL)animated withDuration:(float)duration{
