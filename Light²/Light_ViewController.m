@@ -154,9 +154,12 @@
     }
     
     [self setBatteryIndicatorTapped:NO];
-    
+}
+
+- (void)viewWillAppear:(BOOL)animated{
     [[LARSAdController sharedManager] addAdContainerToView:self.view withParentViewController:self];
     [[LARSAdController sharedManager] setGoogleAdPublisherId:kGoogleAdId];
+    [[LARSAdController sharedManager] layoutBannerViewsForCurrentOrientation:self.interfaceOrientation];
 }
 
 - (void)viewDidUnload
@@ -168,6 +171,10 @@
 
 - (Light_AppDelegate *)delegate{
     return (Light_AppDelegate *)[[UIApplication sharedApplication] delegate];
+}
+
+- (void)willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration{
+    [[LARSAdController sharedManager] layoutBannerViewsForCurrentOrientation:toInterfaceOrientation];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
