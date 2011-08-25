@@ -220,7 +220,6 @@
                          completion:^(BOOL finished){
                              //set main image to transition image
                              if (finished) {
-                                 NSLog(@"Animation finished!");
                                  [[self imageView] setBackgroundColor:[[self transitionView] backgroundColor]];
                                  
                                  //set transition image opacity to 0% to prep for new image

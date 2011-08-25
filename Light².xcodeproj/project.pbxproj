@@ -107,7 +107,6 @@
 		46690C8714021BAF0044D648 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		46690C8814021BAF0044D648 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		46690C8914021BAF0044D648 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		4696543413A28ADB00DA476E /* libSystem.B.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libSystem.B.dylib; path = usr/lib/libSystem.B.dylib; sourceTree = SDKROOT; };
 		46A3C88113BB909300771530 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		46A5F0CB13FCCEE600D8E33D /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libFlurry.a; path = "../../../Open Source Frameworks/Flurry iPhone SDK v2/FlurryLib/libFlurry.a"; sourceTree = "<group>"; };
 		46A5F0CC13FCCEE600D8E33D /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlurryAPI.h; path = "../../../Open Source Frameworks/Flurry iPhone SDK v2/FlurryLib/FlurryAPI.h"; sourceTree = "<group>"; };
@@ -302,11 +301,6 @@
 		46AFD1201397292F00654864 = {
 			isa = PBXGroup;
 			children = (
-				46690C8514021BAF0044D648 /* AudioToolbox.framework */,
-				46690C8614021BAF0044D648 /* iAd.framework */,
-				46690C8714021BAF0044D648 /* MediaPlayer.framework */,
-				46690C8814021BAF0044D648 /* MessageUI.framework */,
-				46690C8914021BAF0044D648 /* SystemConfiguration.framework */,
 				46E42822139C6C12004CA035 /* Images */,
 				46AFD1351397292F00654864 /* Light² */,
 				46AFD1551397293000654864 /* Light²Tests */,
@@ -326,7 +320,11 @@
 		46AFD12E1397292F00654864 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				4696543413A28ADB00DA476E /* libSystem.B.dylib */,
+				46690C8514021BAF0044D648 /* AudioToolbox.framework */,
+				46690C8614021BAF0044D648 /* iAd.framework */,
+				46690C8714021BAF0044D648 /* MediaPlayer.framework */,
+				46690C8814021BAF0044D648 /* MessageUI.framework */,
+				46690C8914021BAF0044D648 /* SystemConfiguration.framework */,
 				46AED4DB13A32E26005E660E /* QuartzCore.framework */,
 				46E4281E139AC151004CA035 /* AVFoundation.framework */,
 				46AFD12F1397292F00654864 /* UIKit.framework */,
@@ -647,7 +645,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CPLUSPLUSFLAGS = "";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				RUN_CLANG_STATIC_ANALYZER = YES;
@@ -667,7 +665,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "4F82B203-986B-48E3-A1FA-909FF3E396BF";
 				RUN_CLANG_STATIC_ANALYZER = NO;
@@ -685,7 +683,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Light²/Light²-Prefix.pch";
 				INFOPLIST_FILE = "Light²/Light²-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Open Source Frameworks/Flurry iPhone SDK v2/FlurryLib\"",
@@ -705,7 +703,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Light²/Light²-Prefix.pch";
 				INFOPLIST_FILE = "Light²/Light²-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../Open Source Frameworks/Flurry iPhone SDK v2/FlurryLib\"",
